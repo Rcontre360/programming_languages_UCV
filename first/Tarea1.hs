@@ -1,51 +1,52 @@
---TODO add the most general definition for each function
+module Tarea1 where
 --PARTE 1
+
 --1
-esNoTanBit::Int -> Bool
+esNoTanBit::(Num a, Ord a) => a -> Bool
 esNoTanBit x = x == 0 || x == 1
 
 --2
-negarBit:: Int -> Int
+negarBit:: (Num a, Ord a) => a -> Int
 negarBit x = if esNoTanBit(x) then 1 else error "invalid input"
 
 --3
 -- x = [Int]. return Bool
 
-type Checker = [Int] -> Bool
+type Checker a = [a] -> Bool
 
 --a with guards
-esSecuenciaNoTanBits1:: Checker
+esSecuenciaNoTanBits1:: (Num a, Ord a)=> Checker a
 esSecuenciaNoTanBits1 [] = True
 esSecuenciaNoTanBits1 (x:xs)
   | esNoTanBit x && esSecuenciaNoTanBits1 xs = True
   | otherwise = False
 
 --b 
-esSecuenciaNoTanBits2:: Checker
+esSecuenciaNoTanBits2:: (Num a, Ord a)=> Checker a
 esSecuenciaNoTanBits2 [] = True
 esSecuenciaNoTanBits2 (x:xs) = esNoTanBit x && esSecuenciaNoTanBits2 xs
 
 --c
-esSecuenciaNoTanBits3:: Checker
+esSecuenciaNoTanBits3:: (Num a, Ord a)=> Checker a
 esSecuenciaNoTanBits3 = all esNoTanBit
 
 
 --4 
-type Mapper = [Int] -> [Int]
-inverter::Int->Int
+type Mapper a = [a] -> [a]
+inverter::Num a => a->a
 inverter x = -(x-1)
 
 --a
-invertirNoTanBits:: Mapper
+invertirNoTanBits:: (Num a, Eq a) => Mapper a
 invertirNoTanBits [] = []
 invertirNoTanBits (x:xs) = inverter x:invertirNoTanBits xs
 
 --b
-invertirNoTanBits2::Mapper
+invertirNoTanBits2::(Num a) => Mapper a
 invertirNoTanBits2 = map inverter
 
 --c
-invertirNoTanBits3::Mapper
+invertirNoTanBits3::(Num a) => Mapper a
 invertirNoTanBits3 xs = [inverter x | x <- xs]
 
 --5 se asume q x solo contiene noTanBits (0,1)
@@ -54,12 +55,13 @@ contarNoTanBits x = (length(x) - n, n)
   where n = foldl (+) 0 x
 
 --6
-secuenciasNoTanBits::Int -> [[Int]]
+secuenciasNoTanBits::(Num a, Ord a) => a -> [[Int]]
 -- tomamos el caso base requerido. Luego llamamos la funcion para generar
 -- el arreglo del n-1 y duplicamos su tama;o. A la mitad le agregamos 1 y
 -- la otra mitad 0. De esta manera obtenemos las combinaciones.
 secuenciasNoTanBits n 
   | n <= 0 = []
+  | n == 1 = [[1],[0]]
   | otherwise = map (1:) prev  ++ map (0:) prev
     where prev = secuenciasNoTanBits (n-1)
 
@@ -85,7 +87,9 @@ aListaHaskell (Const a rest)= a:aListaHaskell rest
 --9
 concatena :: Lista a -> Lista a -> Lista a
 
+concatena  Vacia Vacia = Vacia
 concatena  Vacia (Const a rest)= Const a rest
+concatena  (Const a rest) Vacia = Const a rest
 concatena  (Const x xs) (Const y ys)= Const x (concatena xs (Const y ys))
 
 --10
