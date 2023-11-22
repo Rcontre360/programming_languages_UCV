@@ -56,9 +56,10 @@ contarNoTanBits x = (length(x) - n, n)
 
 --6
 secuenciasNoTanBits::(Num a, Ord a) => a -> [[Int]]
--- tomamos el caso base requerido. Luego llamamos la funcion para generar
--- el arreglo del n-1 y duplicamos su tama;o. A la mitad le agregamos 1 y
--- la otra mitad 0. De esta manera obtenemos las combinaciones.
+-- tomamos el caso base de n=0 y n=1. Es necesario especificar n=1 ya que
+-- basicamente "multiplicamos" el arreglo por 2 en cada iteracion. 
+-- Luego llamamos la funcion para generar el arreglo del n-1 y hacemos 2 copias.
+-- A una copia le agregamos 1 al frente de cada elemento a la otra le agregamos 0.
 secuenciasNoTanBits n 
   | n <= 0 = []
   | n == 1 = [[1],[0]]
