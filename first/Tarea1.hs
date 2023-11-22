@@ -98,13 +98,17 @@ concatena  (Const x xs) (Const y ys)= Const x (concatena xs (Const y ys))
 eliminaTodos:: (a -> Bool) -> Lista a -> Lista a
 
 eliminaTodos f Vacia = Vacia
-eliminaTodos f (Const x xs) = if f x then (Const x rest) else rest
+eliminaTodos f (Const x xs) = if not (f x) then (Const x rest) else rest
   where rest = eliminaTodos f xs
 
 --12
 
-ordenar:: Lista a -> Lista a
-ordenar a = Vacia
+ordenar :: Ord a => Lista a -> Lista a
+
+ordenar Vacia = Vacia
+ordenar (Const x xs) = lower xs `concatena` (Const x Vacia) `concatena` upper xs
+  where lower = ordenar . eliminaTodos (>=x) 
+        upper = ordenar . eliminaTodos (<x) 
 
 
 
