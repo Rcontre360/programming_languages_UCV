@@ -28,68 +28,68 @@ describe suite = do
 esNoTanBitTests:: IO()
 esNoTanBitTests = do
   describe "esNoTanBit"
-  expect "with 0" True (esNoTanBit 0)
-  expect "with 1" True (esNoTanBit 1)
-  expect "with 2" False (esNoTanBit 2)
-  expect "with -1" False (esNoTanBit 31)
+  expect "" True (esNoTanBit 0)
+  expect "" True (esNoTanBit 1)
+  expect "" False (esNoTanBit 2)
+  expect "" False (esNoTanBit 31)
 
 negarBitTests:: IO()
 negarBitTests = do
   describe "negarBit"
-  expect "with 0" 1 (negarBit 0)
-  expect "with 1" 1 (negarBit 1)
-  expectException "Not bit" 2 negarBit
-  expectException "Not bit" 4 negarBit
+  expect "" 1 (negarBit 0)
+  expect "" 0 (negarBit 1)
+  expectException "" 2 negarBit
+  expectException "" 4 negarBit
 
 esSecuenciaNoTanBits1Tests:: IO()
 esSecuenciaNoTanBits1Tests = do
   describe "esSecuenciaNoTanBits1"
-  expect "empty list" True (esSecuenciaNoTanBits1 [])
-  expect "with bits" True (esSecuenciaNoTanBits1 [0,0,0,0,0])
-  expect "with bits" True (esSecuenciaNoTanBits1 [1,1,1,1,1])
-  expect "with bits" True (esSecuenciaNoTanBits1 [1,0,0,1,0])
-  expect "with no bits" False (esSecuenciaNoTanBits1 [1,0,0,1,2])
-  expect "with no bits" False (esSecuenciaNoTanBits1 [5])
+  expect "" True (esSecuenciaNoTanBits1 [])
+  expect "" True (esSecuenciaNoTanBits1 [0,0,0,0,0])
+  expect "" True (esSecuenciaNoTanBits1 [1,1,1,1,1])
+  expect "" True (esSecuenciaNoTanBits1 [1,0,0,1,0])
+  expect "" False (esSecuenciaNoTanBits1 [1,0,0,1,2])
+  expect "" False (esSecuenciaNoTanBits1 [5])
 
 esSecuenciaNoTanBits2Tests:: IO()
 esSecuenciaNoTanBits2Tests = do
   describe "esSecuenciaNoTanBits2"
-  expect "empty list" True (esSecuenciaNoTanBits2 [])
-  expect "with bits" True (esSecuenciaNoTanBits2 [0,0,0,0,0])
-  expect "with bits" True (esSecuenciaNoTanBits2 [1,1,1,1,1])
-  expect "with bits" True (esSecuenciaNoTanBits2 [1,0,0,1,0])
-  expect "with no bits" False (esSecuenciaNoTanBits2 [1,0,0,1,2])
-  expect "with no bits" False (esSecuenciaNoTanBits2 [5])
+  expect "" True (esSecuenciaNoTanBits2 [])
+  expect "" True (esSecuenciaNoTanBits2 [0,0,0,0,0])
+  expect "" True (esSecuenciaNoTanBits2 [1,1,1,1,1])
+  expect "" True (esSecuenciaNoTanBits2 [1,0,0,1,0])
+  expect "" False (esSecuenciaNoTanBits2 [1,0,0,1,2])
+  expect "" False (esSecuenciaNoTanBits2 [5])
 
 esSecuenciaNoTanBits3Tests:: IO()
 esSecuenciaNoTanBits3Tests = do
   describe "esSecuenciaNoTanBits3"
-  expect "empty list" True (esSecuenciaNoTanBits3 [])
-  expect "with bits" True (esSecuenciaNoTanBits3 [0,0,0,0,0])
-  expect "with bits" True (esSecuenciaNoTanBits3 [1,1,1,1,1])
-  expect "with bits" True (esSecuenciaNoTanBits3 [1,0,0,1,0])
-  expect "with no bits" False (esSecuenciaNoTanBits3 [1,0,0,1,2])
-  expect "with no bits" False (esSecuenciaNoTanBits3 [5])
+  expect "" True (esSecuenciaNoTanBits3 [])
+  expect "" True (esSecuenciaNoTanBits3 [0,0,0,0,0])
+  expect "" True (esSecuenciaNoTanBits3 [1,1,1,1,1])
+  expect "" True (esSecuenciaNoTanBits3 [1,0,0,1,0])
+  expect "" False (esSecuenciaNoTanBits3 [1,0,0,1,2])
+  expect "" False (esSecuenciaNoTanBits3 [5])
 
 invertirNoTanBitsTest:: IO()
 invertirNoTanBitsTest = do
   describe "invertirNoTanBits"
-  expect "empty list" [] (invertirNoTanBits [])
-  expect "zeroes" [1,1,1,1,1] (invertirNoTanBits [0,0,0,0,0])
-  expect "ones" [0,0,0,0,0] (invertirNoTanBits [1,1,1,1,1])
-  expect "combined" [0,1,1,0,1] (invertirNoTanBits [1,0,0,1,0])
-  expect "one" [0] (invertirNoTanBits [1])
-  expect "zero" [1] (invertirNoTanBits [0])
+  expect "" [] (invertirNoTanBits [])
+  expect "" [1,1,1,1,1] (invertirNoTanBits [0,0,0,0,0])
+  expect "" [0,0,0,0,0] (invertirNoTanBits [1,1,1,1,1])
+  expect "" [0,1,1,0,1] (invertirNoTanBits [1,0,0,1,0])
+  expect "" [0] (invertirNoTanBits [1])
+  expect "" [1] (invertirNoTanBits [0])
 
 invertirNoTanBits2Test:: IO()
 invertirNoTanBits2Test = do
   describe "invertirNoTanBits2"
-  expect "empty list" [] (invertirNoTanBits2 [])
-  expect "zeroes" [1,1,1,1,1] (invertirNoTanBits2 [0,0,0,0,0])
-  expect "ones" [0,0,0,0,0] (invertirNoTanBits2 [1,1,1,1,1])
-  expect "combined" [0,1,1,0,1] (invertirNoTanBits2 [1,0,0,1,0])
-  expect "one" [0] (invertirNoTanBits2 [1])
-  expect "zero" [1] (invertirNoTanBits2 [0])
+  expect "" [] (invertirNoTanBits2 [])
+  expect "" [1,1,1,1,1] (invertirNoTanBits2 [0,0,0,0,0])
+  expect "" [0,0,0,0,0] (invertirNoTanBits2 [1,1,1,1,1])
+  expect "" [0,1,1,0,1] (invertirNoTanBits2 [1,0,0,1,0])
+  expect "" [0] (invertirNoTanBits2 [1])
+  expect "" [1] (invertirNoTanBits2 [0])
 
 invertirNoTanBits3Test:: IO()
 invertirNoTanBits3Test = do
@@ -115,16 +115,18 @@ secuenciasNoTanBitsTest:: IO()
 secuenciasNoTanBitsTest = do
   describe "secuenciasNoTanBitsTest"
   expect "" [] (secuenciasNoTanBits 0)
-  expect "" [[1],[0]] (secuenciasNoTanBits 1)
-  expect "" [[1,1],[1,0],[0,1],[0,0]] (secuenciasNoTanBits 2)
+  expect "" [[0],[1]] (secuenciasNoTanBits 1)
+  expect "" [[0,0],[0,1],[1,0],[1,1]] (secuenciasNoTanBits 2)
   expect "" 
-      [[1,1,1],[1,1,0],[1,0,1],[1,0,0],
-      [0,1,1],[0,1,0],[0,0,1],[0,0,0]] (secuenciasNoTanBits 3)
+      [[0,0,0],[0,0,1],[0,1,0],[0,1,1],
+      [1,0,0],[1,0,1],[1,1,0],[1,1,1]]
+      (secuenciasNoTanBits 3)
   expect "" 
-      [[1,1,1,1],[1,1,1,0],[1,1,0,1],[1,1,0,0],
-      [1,0,1,1],[1,0,1,0],[1,0,0,1],[1,0,0,0],
-      [0,1,1,1],[0,1,1,0],[0,1,0,1],[0,1,0,0],
-      [0,0,1,1],[0,0,1,0],[0,0,0,1],[0,0,0,0]] (secuenciasNoTanBits 4)
+      [[0,0,0,0],[0,0,0,1],[0,0,1,0],[0,0,1,1],
+      [0,1,0,0],[0,1,0,1],[0,1,1,0],[0,1,1,1],
+      [1,0,0,0],[1,0,0,1],[1,0,1,0],[1,0,1,1],
+      [1,1,0,0],[1,1,0,1],[1,1,1,0],[1,1,1,1]]
+      (secuenciasNoTanBits 4)
 
 aListaTest:: IO()
 aListaTest = do

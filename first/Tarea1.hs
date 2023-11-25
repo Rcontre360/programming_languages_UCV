@@ -6,8 +6,8 @@ esNoTanBit::(Num a, Ord a) => a -> Bool
 esNoTanBit x = x == 0 || x == 1
 
 --2
-negarBit:: (Num a, Ord a) => a -> Int
-negarBit x = if esNoTanBit(x) then 1 else error "invalid input"
+negarBit::  (Num a, Ord a) => a -> a
+negarBit x = if esNoTanBit(x) then -(x-1) else error "invalid input"
 
 --3
 -- x = [Int]. return Bool
@@ -33,21 +33,19 @@ esSecuenciaNoTanBits3 = all esNoTanBit
 
 --4 
 type Mapper a = [a] -> [a]
-inverter::Num a => a->a
-inverter x = -(x-1)
 
 --a
-invertirNoTanBits:: (Num a, Eq a) => Mapper a
+invertirNoTanBits:: (Num a, Ord a) => Mapper a
 invertirNoTanBits [] = []
-invertirNoTanBits (x:xs) = inverter x:invertirNoTanBits xs
+invertirNoTanBits (x:xs) = negarBit x:invertirNoTanBits xs
 
 --b
-invertirNoTanBits2::(Num a) => Mapper a
-invertirNoTanBits2 = map inverter
+invertirNoTanBits2::(Num a, Ord a) => Mapper a
+invertirNoTanBits2 = map negarBit
 
 --c
-invertirNoTanBits3::(Num a) => Mapper a
-invertirNoTanBits3 xs = [inverter x | x <- xs]
+invertirNoTanBits3::(Num a, Ord a) => Mapper a
+invertirNoTanBits3 xs = [negarBit x | x <- xs]
 
 --5 se asume q x solo contiene noTanBits (0,1)
 contarNoTanBits::[Int] -> (Int,Int)
@@ -62,8 +60,8 @@ secuenciasNoTanBits::(Num a, Ord a) => a -> [[Int]]
 -- A una copia le agregamos 1 al frente de cada elemento a la otra le agregamos 0.
 secuenciasNoTanBits n 
   | n <= 0 = []
-  | n == 1 = [[1],[0]]
-  | otherwise = map (1:) prev  ++ map (0:) prev
+  | n == 1 = [[0],[1]]
+  | otherwise = map (0:) prev  ++ map (1:) prev
     where prev = secuenciasNoTanBits (n-1)
 
 --PARTE2
