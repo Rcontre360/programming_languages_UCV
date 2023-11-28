@@ -2,49 +2,49 @@ module Tarea1 where
 --PARTE 1
 
 --1
-esNoTanBit::(Num a, Ord a) => a -> Bool
+esNoTanBit::Int -> Bool
 esNoTanBit x = x == 0 || x == 1
 
 --2
-negarBit::  (Num a, Ord a) => a -> a
+negarBit::  Int -> Int
 negarBit x = if esNoTanBit(x) then -(x-1) else error "invalid input"
 
 --3
 -- x = [Int]. return Bool
 
-type Checker a = [a] -> Bool
+type Checker = [Int] -> Bool
 
 --a with guards
-esSecuenciaNoTanBits1:: (Num a, Ord a)=> Checker a
+esSecuenciaNoTanBits1:: Checker
 esSecuenciaNoTanBits1 [] = True
 esSecuenciaNoTanBits1 (x:xs)
   | esNoTanBit x && esSecuenciaNoTanBits1 xs = True
   | otherwise = False
 
 --b 
-esSecuenciaNoTanBits2:: (Num a, Ord a)=> Checker a
+esSecuenciaNoTanBits2:: Checker
 esSecuenciaNoTanBits2 [] = True
 esSecuenciaNoTanBits2 (x:xs) = esNoTanBit x && esSecuenciaNoTanBits2 xs
 
 --c
-esSecuenciaNoTanBits3:: (Num a, Ord a)=> Checker a
+esSecuenciaNoTanBits3::  Checker
 esSecuenciaNoTanBits3 = all esNoTanBit
 
 
 --4 
-type Mapper a = [a] -> [a]
+type Mapper = [Int] -> [Int]
 
 --a
-invertirNoTanBits:: (Num a, Ord a) => Mapper a
+invertirNoTanBits:: Mapper
 invertirNoTanBits [] = []
 invertirNoTanBits (x:xs) = negarBit x:invertirNoTanBits xs
 
 --b
-invertirNoTanBits2::(Num a, Ord a) => Mapper a
+invertirNoTanBits2::Mapper
 invertirNoTanBits2 = map negarBit
 
 --c
-invertirNoTanBits3::(Num a, Ord a) => Mapper a
+invertirNoTanBits3::Mapper
 invertirNoTanBits3 xs = [negarBit x | x <- xs]
 
 --5 se asume q x solo contiene noTanBits (0,1)
