@@ -140,7 +140,7 @@ aListaTest = do
 aListaHaskellTest:: IO()
 aListaHaskellTest = do
   describe "aListaHaskellTest"
-  expect "" ([] :: [Int]) (aListaHaskell Vacia)
+  expect "" [] (aListaHaskell Vacia)
   expect "" [1] (aListaHaskell (Const 1 Vacia))
   expect "" [1,2] (aListaHaskell (Const 1 (Const 2 Vacia)))
   expect "" [1,2,3] (aListaHaskell (Const 1 (Const 2 (Const 3 Vacia))))

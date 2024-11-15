@@ -72,7 +72,47 @@ mSublista list el = if isIn then first:(mSublista rest el) else [list]
         one:rest = dropWhile (el/=) list
 --ALMOST
 
+data Expr = Numero Integer
+  | Suma Expr Expr
+  | Producto Expr Expr
 
+toString :: Expr -> String
+
+toString (Numero n) = show n
+toString (Suma a b) = (toString a) ++ "+" ++ (toString b)
+toString (Producto a b) = "(" ++ (toString a) ++ "*" ++ (toString b) ++ ")"
+
+toString (Producto a b) = "(" ++ (toString a) ++ "*" ++ (toString b) ++ ")"
+
+eval::Expr -> Integer
+
+eval (Numero n) = n
+eval (Suma a b) = (eval a) + (eval b)
+eval (Producto a b) = (eval a) * (eval b)
+
+data Arbin a = Node a (Arbin a) (Arbin a)
+  | Leaf a
+
+max3Node:: (Ord a, Num a) => Arbin a -> (a , a , a)
+
+max3Node (Leaf a) = (a,0,0)
+max3Node (Node a b c) = (maxTuple (a, getCurrent b, getCurrent c) (maxTuple left right))
+  where left = max3Node b
+        right = max3Node c
+        maxTuple (a,b,c) (x,y,z) = if a+b+c > x+y+z then (a,b,c) else (x,y,z)
+
+getCurrent::(Ord a,Num a) => Arbin a -> a
+getCurrent (Node one two three) = one
+getCurrent (Leaf a) = a
+
+insertar::a -> [a] -> [[a]]
+
+insertar a [] = [[a]]
+insertar a (x:xs) = (a:x:xs):map (\el -> x:el) (insertar a xs)
+
+funcion_misteriosa::[Int] -> [[Int]]
+
+funcion_misteriosa (x:xs) = foldl(\a b->concat $ map (insertar b) a)[[x]] xs
 
 
 
